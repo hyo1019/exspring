@@ -17,6 +17,8 @@ CREATE TABLE member
 
 select * from member;
 
+drop table member;
+
 -- BBS 테이블 생성  
 -- MySQL 5.6.5, MariaDB 10.0 버전부터 DEFAULT CURRENT_TIMESTAMP, ON UPDATE CURRENT_TIMESTAMP 설정 가능
 CREATE TABLE bbs
