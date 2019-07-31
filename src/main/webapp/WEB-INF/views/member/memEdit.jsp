@@ -7,6 +7,8 @@
 <title>회원관리</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/comm/menu.jsp" %> 
+	
 	<h1>회원정보수정</h1>
 	<form action="${pageContext.request.contextPath}/member/edit.do" method="post">
 		아이디 : <input type="text" name="memId" value="${memberVo.memId}" readonly="readonly"/> 

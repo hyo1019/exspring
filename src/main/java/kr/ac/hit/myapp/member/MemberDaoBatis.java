@@ -41,5 +41,11 @@ public class MemberDaoBatis implements MemberDao{
 	public int delete(String memId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public MemberVo selectLoginUser(MemberVo vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

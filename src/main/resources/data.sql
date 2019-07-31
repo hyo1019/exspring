@@ -15,9 +15,9 @@ CREATE TABLE member
 -- , PRIMARY KEY ('mem_id')
 );
 
-select * from member;
+select * from bbs;
 
-drop table member;
+drop table bbs;
 
 -- BBS 테이블 생성  
 -- MySQL 5.6.5, MariaDB 10.0 버전부터 DEFAULT CURRENT_TIMESTAMP, ON UPDATE CURRENT_TIMESTAMP 설정 가능
@@ -28,11 +28,15 @@ CREATE TABLE bbs
   bbs_writer VARCHAR(50),
   bbs_reg_date DATETIME DEFAULT CURRENT_TIMESTAMP 
 -- , bbs_mod_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
--- , bbs_count NUMERIC(10,0)
--- , FOREIGN KEY ('bbs_writer') REFERENCES 'member' ('mem_id')
+ , bbs_count NUMERIC(10,0) DEFAULT 0
+ , FOREIGN KEY (bbs_writer) REFERENCES member (mem_id)
 );
 
+SELECT * FROM member;
+
 -- member 테이블에 레코드 1개 추가
+ALTER TABLE member ADD mem_img VARCHAR(100);
+
 -- mem_id는 'a001', mem_pass는 '1234', 
 -- mem_name은 '고길동', mem_point는 100로 저장
 INSERT INTO member 
@@ -65,3 +69,17 @@ CREATE TABLE reply
 --  ,FOREIGN KEY (rep_bbs_no) REFERENCES bbs (bbs_no)
 --  ,FOREIGN KEY (rep_writer) REFERENCES member (mem_id)
 );
+
+-- 상품테이블 : 상품번호, 상품명, 상품가격 /, 상품설명 (제조일자, 유통기한, 상품이미지)
+CREATE TABLE product
+( prod_no INT PRIMARY KEY AUTO_INCREMENT, 
+  prod_name VARCHAR(100),
+  prod_price INT
+);
+
+select * from attach;
+
+-- 해당 글과 그 글의 첨부파일 정보가 함께 조회되도록
+SELECT bbs_no, bbs_title, bbs_content, bbs_writer, bbs_reg_date, bbs_count, att_no, att_org_name, att_new_name, att_bbs_no
+FROM bbs LEFT OUTER JOIN attach ON bbs_no = att_bbs_no 
+WHERE bbs_no = 8;
